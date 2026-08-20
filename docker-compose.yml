@@ -1,0 +1,12 @@
+services:
+  analyzer:
+    build: ./analyzer
+  gateway:
+    build: ./gateway
+    environment: {ANALYZER_URL: "http://analyzer:8001"}
+    ports: ["8084:8080"]
+    depends_on: [analyzer]
+  web:
+    build: ./web
+    ports: ["8085:80"]
+    depends_on: [gateway]
